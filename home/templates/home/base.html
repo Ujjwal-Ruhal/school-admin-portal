@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<!-- Navbar -->
+<div style="text-align:center; padding:10px;">
+    {% if request.user.is_authenticated %}
+        Logged in as <strong>{{ request.user.username }}</strong> |
+        <a href="/logout/">Logout</a> |
+        <a href="/">Home</a> |
+        <a href="/add/">Add Student</a>
+    {% else %}
+        <a href="/login/">Login</a> | <a href="/signup/">Signup</a>
+    {% endif %}
+</div>
+
+<!-- Messages -->
+{% if messages %}
+    {% for m in messages %}
+        <p style="background:#222; color:#0f0; padding:6px; text-align:center;">{{ m }}</p>
+    {% endfor %}
+{% endif %}
+
+<!-- Page Content -->
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

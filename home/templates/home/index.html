@@ -1,0 +1,42 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+<form method="get" style="margin-bottom:20px; text-align:center;">
+    <input type="text" name="search" placeholder="Search by name" value="{{ request.GET.search }}">
+    <button type="submit">Search</button>
+</form>
+
+<table border="1" cellpadding="10" style="margin:auto;">
+<tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Course</th>
+    <th>Edit</th>
+    <th>Delete</th>
+</tr>
+
+{% for s in students %}
+<tr>
+    <td>{{ s.name }}</td>
+    <td>{{ s.age }}</td>
+    <td>{{ s.course }}</td>
+    <td><a href="/edit/{{ s.id }}/">Edit</a></td>
+    <td><a href="/delete/{{ s.id }}/">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<div style="text-align:center; margin-top:20px;">
+    {% if students.has_previous %}
+        <a href="?page={{ students.previous_page_number }}&search={{ request.GET.search }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ students.number }} of {{ students.paginator.num_pages }}</span>
+
+    {% if students.has_next %}
+        <a href="?page={{ students.next_page_number }}&search={{ request.GET.search }}">Next</a>
+    {% endif %}
+</div>
+
+{% endblock %}

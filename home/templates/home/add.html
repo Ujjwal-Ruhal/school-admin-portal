@@ -1,0 +1,11 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+<form method="POST" style="text-align:center; margin-top:20px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Save</button>
+</form>
+
+{% endblock %}
